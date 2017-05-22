@@ -1,0 +1,84 @@
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[framed,node distance=2cm,auto,>=stealth']
+    \node[rectangle, draw=black] (tracker) {Tracker};
+    \node[rectangle, draw=black, right = of tracker] (peerA) {Peer A};
+    \node[rectangle, draw=black, right = of peerA] (peerB) {Peer B};
+    \node[rectangle, draw=black, right = of peerB] (peerC) {Peer C};
+    \node[rectangle, draw=black, right = of peerC] (peerD) {Peer D};
+    %
+    \node[below of = tracker, node distance=650] (tracker_ground) {};
+    \node[below of = peerA, node distance=650] (peerA_ground) {};
+    \node[below of = peerB, node distance=650] (peerB_ground) {};
+    \node[below of = peerC, node distance=650] (peerC_ground) {};
+    \node[below of = peerD, node distance=650] (peerD_ground) {};
+    %
+    \draw[dashed] (tracker) -- (tracker_ground);
+    \draw[dashed] (peerA) -- (peerA_ground);
+    \draw[dashed] (peerB) -- (peerB_ground);
+    \draw[dashed] (peerC) -- (peerC_ground);
+    \draw[dashed] (peerD) -- (peerD_ground);
+
+    \draw[<-] ($(tracker)!0.04!(tracker_ground)$) -- node[above,scale=1,midway]{CONNECT(JOIN x)} ($(peerA)!0.04!(peerA_ground)$);
+    \draw[->] ($(tracker)!0.065!(tracker_ground)$) -- node[above,scale=1,midway]{OK} ($(peerA)!0.065!(peerA_ground)$);
+    \draw[<-] ($(tracker)!0.09!(tracker_ground)$) -- node[above,scale=1,midway]{STAT\_REPORT} ($(peerA)!0.09!(peerA_ground)$);
+    \draw[->] ($(tracker)!0.115!(tracker_ground)$) -- node[above,scale=1,midway]{OK} ($(peerA)!0.115!(peerA_ground)$);
+
+    \draw[<-] ($(tracker)!0.14!(tracker_ground)$) -- node[above,scale=1,midway]{Select\ Swarm\ x} ($(peerB)!0.14!(peerB_ground)$);
+    \draw[->] ($(tracker)!0.165!(tracker_ground)$) -- node[scale=1,midway]{OK+MPD(x)} ($(peerB)!0.165!(peerB_ground)$);
+    \draw[<-] ($(tracker)!0.19!(tracker_ground)$) -- node[above,scale=1,midway]{CONNECT(JOIN)} ($(peerB)!0.19!(peerB_ground)$);
+    \draw[->] ($(tracker)!0.215!(tracker_ground)$) -- node[above,scale=1,midway]{OK+PeerList} ($(peerB)!0.215!(peerB_ground)$);
+
+    \draw[<-] ($(peerA)!0.24!(peerA_ground)$) -- node[above,scale=1,midway]{HANDSHAKE} ($(peerB)!0.24!(peerB_ground)$);
+    \draw[->] ($(peerA)!0.265!(peerA_ground)$) -- node[above,scale=1,midway]{HS+HAVE} ($(peerB)!0.265!(peerB_ground)$);
+    \draw[<-] ($(peerA)!0.29!(peerA_ground)$) -- node[above,scale=1,midway]{PEX\_REQ} ($(peerB)!0.29!(peerB_ground)$);
+    \draw[->] ($(peerA)!0.315!(peerA_ground)$) -- node[above,scale=1,midway]{PEX\_RES} ($(peerB)!0.315!(peerB_ground)$);
+
+    \draw[<-] ($(peerB)!0.34!(peerB_ground)$) -- node[above,scale=1,midway]{HANDSHAKE} ($(peerC)!0.34!(peerC_ground)$);
+    \draw[->] ($(peerB)!0.365!(peerB_ground)$) -- node[above,scale=1,midway]{HANDSHAKE} ($(peerD)!0.365!(peerD_ground)$);
+
+    \draw[<-] ($(tracker)!0.39!(tracker_ground)$) -- node[above,scale=1,midway]{STAT\_REPORT} ($(peerA)!0.39!(peerA_ground)$);
+    \draw[->] ($(tracker)!0.415!(tracker_ground)$) -- node[above,scale=1,midway]{OK} ($(peerA)!0.415!(peerA_ground)$);
+
+    \draw[<-] ($(peerB)!0.415!(peerB_ground)$) -- node[above,scale=1,midway]{HS+HAVE} ($(peerC)!0.415!(peerC_ground)$);
+    \draw[<-] ($(peerB)!0.44!(peerB_ground)$) -- node[above,scale=1,midway]{HS+HAVE+CHOKE} ($(peerD)!0.44!(peerD_ground)$);
+
+    \draw[<-] ($(peerA)!0.465!(peerA_ground)$) -- node[above,scale=1,midway]{REQUEST} ($(peerB)!0.465!(peerB_ground)$);
+    \draw[->] ($(peerB)!0.465!(peerB_ground)$) -- node[above,scale=1,midway]{REQUEST} ($(peerC)!0.465!(peerC_ground)$);
+
+     \draw[->] ($(peerA)!0.49!(peerA_ground)$) -- node[above,scale=1,midway]{DATA} ($(peerB)!0.49!(peerB_ground)$);
+    \draw[<-] ($(peerB)!0.49!(peerB_ground)$) -- node[above,scale=1,midway]{DATA} ($(peerC)!0.49!(peerC_ground)$);
+    \draw[<-] ($(peerA)!0.515!(peerA_ground)$) -- node[above,scale=1,midway]{ACK,HAVE} ($(peerB)!0.515!(peerB_ground)$);
+    \draw[->] ($(peerB)!0.515!(peerB_ground)$) -- node[above,scale=1,midway]{ACK,HAVE} ($(peerC)!0.515!(peerC_ground)$);
+
+    \draw[<-] ($(tracker)!0.54!(tracker_ground)$) -- node[above,scale=1,midway]{STAT\_REPORT} ($(peerB)!0.54!(peerB_ground)$);
+    \draw[->] ($(tracker)!0.565!(tracker_ground)$) -- node[above,scale=1,midway]{OK} ($(peerB)!0.565!(peerB_ground)$);
+
+    \draw[<-] ($(peerB)!0.565!(peerB_ground)$) -- node[above,scale=1,midway]{UNCHOKE} ($(peerD)!0.565!(peerD_ground)$);
+    \draw[->] ($(peerB)!0.59!(peerB_ground)$) -- node[above,scale=1,midway]{REQUEST} ($(peerD)!0.59!(peerD_ground)$);
+    \draw[<-] ($(peerB)!0.615!(peerB_ground)$) -- node[above,scale=1,midway]{DATA} ($(peerD)!0.615!(peerD_ground)$);
+    \draw[->] ($(peerB)!0.64!(peerB_ground)$) -- node[above,scale=1,midway]{ACK,HAVE} ($(peerD)!0.64!(peerD_ground)$);
+
+    \draw[<-] ($(peerA)!0.665!(peerA_ground)$) -- node[above,scale=1,midway]{HAVE} ($(peerB)!0.665!(peerB_ground)$);
+    \draw[->] ($(peerB)!0.665!(peerB_ground)$) -- node[above,scale=1,midway]{HAVE} ($(peerC)!0.665!(peerC_ground)$);
+    \draw[<-] ($(peerB)!0.69!(peerB_ground)$) -- node[above,scale=1,midway]{REQUEST} ($(peerC)!0.69!(peerC_ground)$);
+    \draw[<-] ($(peerB)!0.715!(peerB_ground)$) -- node[above,scale=1,midway]{REQUEST} ($(peerD)!0.715!(peerD_ground)$);
+    \draw[->] ($(peerB)!0.74!(peerB_ground)$) -- node[above,scale=1,midway]{DATA} ($(peerC)!0.74!(peerC_ground)$);
+    \draw[->] ($(peerB)!0.765!(peerB_ground)$) -- node[above,scale=1,midway]{DATA} ($(peerD)!0.765!(peerD_ground)$);
+
+    \draw[<-] ($(peerA)!0.79!(peerA_ground)$) -- node[above,scale=1,midway]{KEEPALIVE} ($(peerB)!0.79!(peerB_ground)$);
+    \draw[->] ($(peerB)!0.79!(peerB_ground)$) -- node[above,scale=1,midway]{KEEPALIVE} ($(peerC)!0.79!(peerC_ground)$);
+    \draw[->] ($(peerB)!0.815!(peerB_ground)$) -- node[above,scale=1,midway]{KEEPALIVE} ($(peerD)!0.815!(peerD_ground)$);
+
+    \draw[<-] ($(tracker)!0.84!(tracker_ground)$) -- node[above,scale=1,midway]{STAT\_REPORT} ($(peerC)!0.84!(peerC_ground)$);
+    \draw[->] ($(tracker)!0.865!(tracker_ground)$) -- node[above,scale=1,midway]{OK} ($(peerC)!0.865!(peerC_ground)$);
+
+    \draw[<-] ($(peerA)!0.89!(peerA_ground)$) -- node[above,scale=1,midway]{HANDSHAKE} ($(peerB)!0.89!(peerB_ground)$);
+    \draw[->] ($(peerB)!0.89!(peerB_ground)$) -- node[above,scale=1,midway]{HANDSHAKE} ($(peerC)!0.89!(peerC_ground)$);
+    \draw[->] ($(peerB)!0.915!(peerB_ground)$) -- node[above,scale=1,midway]{HANDSHAKE} ($(peerD)!0.915!(peerD_ground)$);
+
+    \draw[<-] ($(tracker)!0.94!(tracker_ground)$) -- node[above,scale=1,midway]{CONNECT/FIND(LEAVE x)} ($(peerC)!0.94!(peerC_ground)$);
+    \draw[<-] ($(tracker)!0.965!(tracker_ground)$) -- node[above,scale=1,midway]{CONNECT/FIND(JOIN y,z)} ($(peerC)!0.965!(peerC_ground)$);
+\end{tikzpicture}
+\caption{Messages flow} \label{img:messages-flow}
+\end{figure}
