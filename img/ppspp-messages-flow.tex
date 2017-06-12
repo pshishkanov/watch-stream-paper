@@ -1,6 +1,6 @@
 \begin{figure}
 \centering
-\begin{tikzpicture}[scale=0.75,node distance=2cm,auto,>=stealth']
+\begin{tikzpicture}[node distance=2cm,auto,>=stealth']
     \node[rectangle, draw=black] (tracker) {Tracker};
     \node[rectangle, draw=black, right = of tracker] (peerA) {Peer A};
     \node[rectangle, draw=black, right = of peerA] (peerB) {Peer B};
@@ -80,5 +80,5 @@
     \draw[<-] ($(tracker)!0.94!(tracker_ground)$) -- node[above,scale=1,midway]{\scriptsize CONNECT/FIND(LEAVE x)} ($(peerC)!0.94!(peerC_ground)$);
     \draw[<-] ($(tracker)!0.965!(tracker_ground)$) -- node[above,scale=1,midway]{\scriptsize CONNECT/FIND(JOIN y,z)} ($(peerC)!0.965!(peerC_ground)$);
 \end{tikzpicture}
-\caption{Диаграмма обмена сообщениями в соответствии с протоколом PPSPP} \label{img:ppspp-messages-flow}
+\caption{Messages flow} \label{img:messages-flow}
 \end{figure}

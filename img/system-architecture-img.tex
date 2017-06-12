@@ -1,26 +1,28 @@
-\begin{figure}[H]
+\begin{figure}
 \centering
-\begin{tikzpicture}
-    % Styles
-    \tikzset{>=stealth'}
-    \tikzstyle{module} = [draw, very thick, fill=white, rectangle, minimum height=3em, minimum width=10em, font={\sffamily\bfseries}]
+\resizebox{450pt}{200pt}{
+    \begin{tikzpicture}[scale=0.50]
+        % Styles
+        \tikzset{>=stealth'}
+        \tikzstyle{module} = [draw, very thick, fill=white, rectangle, minimum height=3em, minimum width=10em, font={\sffamily\bfseries}]
 
-    % Nodes
-    \node[module] (tracker) {Tracker};
-    \node[module] (peerB) [below = of tracker] {Peer B (Streamer)};
-    \node[module] (peerA) [left = of peerB] {Peer A (Downloader)};
-    \node[module] (peerC) [right = of peerB] {Peer C (Downloader)};
-    \node[module] (peerD) [below = of peerB] {Peer D (Downloader)};
+        % Nodes
+        \node[module] (tracker) {Tracker};
+        \node[module] (peerB) [below = of tracker] {Peer B (Streamer)};
+        \node[module] (peerA) [left = of peerB] {Peer A (Downloader)};
+        \node[module] (peerC) [right = of peerB] {Peer C (Downloader)};
+        \node[module] (peerD) [below = of peerB] {Peer D (Downloader)};
 
-    % Arrows
-    \draw ($(tracker.west)$) edge[<->, bend right=30] ($(peerA.north)$);
-    \draw ($(tracker.east)$) edge[<->, bend left=30] ($(peerC.north)$);
-    \draw ($(tracker.south)$) edge[<->] ($(peerB.north)$);
-    \draw ($(peerA.east)$) edge[<->] ($(peerB.west)$);
-    \draw ($(peerC.west)$) edge[<->] ($(peerB.east)$);
-    \draw ($(peerA.south)$) edge[<->, bend right=30] ($(peerD.west)$);
-    \draw ($(peerC.south)$) edge[<->, bend left=30] ($(peerD.east)$);
+        % Arrows
+        \draw ($(tracker.west)$) edge[<->, bend right=30] ($(peerA.north)$);
+        \draw ($(tracker.east)$) edge[<->, bend left=30] ($(peerC.north)$);
+        \draw ($(tracker.south)$) edge[<->] ($(peerB.north)$);
+        \draw ($(peerA.east)$) edge[<->] ($(peerB.west)$);
+        \draw ($(peerC.west)$) edge[<->] ($(peerB.east)$);
+        \draw ($(peerA.south)$) edge[<->, bend right=30] ($(peerD.west)$);
+        \draw ($(peerC.south)$) edge[<->, bend left=30] ($(peerD.east)$);
 
-\end{tikzpicture}
+    \end{tikzpicture}
+}
 \caption{System architecture} \label{img:system-architecture}
 \end{figure}

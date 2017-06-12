@@ -1,9 +1,19 @@
-\documentclass[russian, 14pt, utf8, floatsection, equationsection, simple]{eskdtext}
+\documentclass[russian, 14pt, utf8]{extarticle}
+
 
 % Настройка шрифтов
 \usepackage[T2A]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage[russian]{babel}
+
+\usepackage{float}
+\usepackage[figurename=Рисунок,tablename=Таблица]{caption}
+\captionsetup[figure]{labelsep=endash}
+\captionsetup[table]{labelsep=endash}
+
+\makeatletter
+\renewcommand\@biblabel[1]{#1)}
+\makeatother
 
 \usepackage{graphicx}
 \graphicspath{ {img/} }
@@ -13,9 +23,9 @@
 \usepackage{enumitem}
 \setlist{nolistsep}
 
-\usepackage{mathtext} % Русские буквы в формулах
-\usepackage{amssymb, amsfonts, amsmath, amsthm} % Математические дополнения от АМС
-\usepackage[linesnumbered,boxed]{algorithm2e}
+% \usepackage{mathtext} % Русские буквы в формулах
+% \usepackage{amssymb, amsfonts, amsmath, amsthm} % Математические дополнения от АМС
+% \usepackage[linesnumbered,boxed]{algorithm2e}
 
 \usepackage{array}
 \usepackage{tabularx}
@@ -24,42 +34,77 @@
 \usepackage{listings}
 
 \usepackage{titlesec}
+\titleformat*{\subsection}{\normalsize}
+\titleformat*{\subsubsection}{\normalsize}
+
+\titleformat{\section}[block]
+  {\filcenter}
+  {\thesection}
+  {1em}
+  {\MakeUppercase}
+
+\titlespacing*{\section}
+{0pt}{7.5ex plus 1ex minus .2ex}{6.3ex plus .2ex}
+\titlespacing*{\subsection}
+{0pt}{7.5ex plus 1ex minus .2ex}{5.3ex plus .2ex}
+\titlespacing*{\subsubsection}
+{0pt}{5.5ex plus 1ex minus .2ex}{4.3ex plus .2ex}
+
 \newcommand{\sectionbreak}{\clearpage}
-\newcommand{\subsectionbreak}{\clearpage}
+
+\usepackage {indentfirst}
 
 \usepackage{geometry}
 \geometry{left=3cm}
-\geometry{right=1.5cm}
-\geometry{top=1.75cm}
+\geometry{right=2cm}
+\geometry{top=2cm}
 \geometry{bottom=3cm}
+
+\renewcommand\labelitemi{--}
+
+\usepackage{tikz}
+\usetikzlibrary{arrows,positioning,fit,shapes,calc,intersections}
+
+\usepackage{caption}
+\captionsetup[table]{
+  singlelinecheck=false,%%%%%%% a single line is centered by default
+  labelsep=colon,%%%%%%
+  skip = \medskipamount}
 
  % Полуторный интервал
 \linespread{1.4}
 
-\ESKDdocName{Разработка мобильного приложения для передачи потокового контента} % Тема ВКР
-\ESKDauthor{\scriptsize Шишканов П.А.} % "Разраб." в штампе на листе содержания
-\ESKDchecker{\scriptsize Салех Х.М.} % "Пров."  в штампе на листе содержания
-\ESKDnormContr{\scriptsize Макаров Р.И.} % "Н. контр." в штампе на листе содержания
-\ESKDapprovedBy{...} %  "Увт." в штампе на листе содержания
-\ESKDdate{17/06/01}
-\ESKDsignature{ВЛГУ...} % Шифр
-\ESKDletter{}{У}{} % Литеры
-\ESKDsectStyle{section}{\normalsize} % Заголовки разделов обычным шрифтом
-\ESKDsectStyle{subsection}{\normalsize} % Заголовки разделов обычным шрифтом
-\ESKDsectStyle{subsubsection}{\normalsize} % Заголовки подразделов обычным шрифтом
-\renewcommand{\ESKDtheTitleFieldX}{Владимир\ESKDtheYear~г.}
+\renewcommand\contentsname{Содержание}
+% \renewcommand\refname{Список используемых источников}
 
-\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
-\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
-\newcolumntype{R}[1]{>{\raggedleft\arraybackslash}p{#1}}
 
-\newcommand{\No}{\textnumero}
-\newcommand{\verbatimfont}[1]{\def\verbatim@font{#1}}
+
+% \ESKDdocName{Разработка мобильного приложения для передачи потокового контента} % Тема ВКР
+% \ESKDauthor{\scriptsize Шишканов П.А.} % "Разраб." в штампе на листе содержания
+% \ESKDchecker{\scriptsize Салех Х.М.} % "Пров."  в штампе на листе содержания
+% \ESKDnormContr{\scriptsize Макаров Р.И.} % "Н. контр." в штампе на листе содержания
+% \ESKDapprovedBy{...} %  "Увт." в штампе на листе содержания
+% \ESKDdate{17/06/01}
+% \ESKDsignature{ВЛГУ...} % Шифр
+% \ESKDletter{}{У}{} % Литеры
+% \ESKDsectStyle{section}{\normalsize} % Заголовки разделов обычным шрифтом
+% \ESKDsectStyle{subsection}{\normalsize} % Заголовки разделов обычным шрифтом
+% \ESKDsectStyle{subsubsection}{\normalsize} % Заголовки подразделов обычным шрифтом
+% \renewcommand{\ESKDtheTitleFieldX}{Владимир\ESKDtheYear~г.}
+
+% \newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+% \newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+% \newcolumntype{R}[1]{>{\raggedleft\arraybackslash}p{#1}}
+
+% \newcommand{\No}{\textnumero}
+% \newcommand{\verbatimfont}[1]{\def\verbatim@font{#1}}
 
 \makeatletter
 \let\oldl@section\l@section
 \def\l@section#1#2{\oldl@section{\normalfont#1}{\normalfont#2}}
 \makeatother
+
+\usepackage[nottoc,notlot,notlof]{tocbibind}
 
 \begin{document}
 	\input{diploma.tex}
